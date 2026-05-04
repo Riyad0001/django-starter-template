@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-slate-50">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <title>{% block title %}Dashboard{% endblock %}</title>
+    <script>
+        window.tailwind = {
+            config: {
+                darkMode: 'class'
+            }
+        };
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="h-full bg-slate-50 text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100">
+    {% block body %}{% endblock %}
+
+    <script>
+        const themeToggle = document.querySelector('[data-theme-toggle]');
+        const sidebar = document.querySelector('[data-sidebar]');
+        const sidebarOpen = document.querySelector('[data-sidebar-open]');
+        const sidebarCloseButtons = document.querySelectorAll('[data-sidebar-close]');
+        const root = document.documentElement;
+        const savedTheme = localStorage.getItem('theme');
+
+        if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            root.classList.add('dark');
+        }
+
+        themeToggle?.addEventListener('click', () => {
+            root.classList.toggle('dark');
+            localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
+        });
+
+        sidebarOpen?.addEventListener('click', () => {
+            sidebar?.classList.remove('hidden');
+        });
+
+        sidebarCloseButtons.forEach((button) => {
+            button.addEventListener('click', () => {
+                sidebar?.classList.add('hidden');
+            });
+        });
+    </script>
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>
