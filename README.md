@@ -11,3 +11,4 @@
 - Custom Admin dashboard
 
 - Subscription system using STRIPE
+# GotMySlot
