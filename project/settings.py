@@ -14,7 +14,7 @@ SECRET_KEY = config('SECRET_KEY', default='django-insecure-$!@#^*&%^!@#*^&*!%$#@
 DEBUG = config('DEBUG', default=True, cast=bool)
 
 ALLOWED_HOSTS = [
-    config('ALLOWED_HOST', default='127.0.0.1'),
+    "*"
 ]
 
 
@@ -42,8 +42,10 @@ INSTALLED_APPS = [
 
     # lcoal apps
     'apps.account',
+    'apps.core',
     'apps.dashboard',
     'apps.socialauth',
+    'apps.website',
 
 ]
 
@@ -74,6 +76,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 # custom context processors
+                'apps.core.context_processors.site_settings',
             ],
         },
     },
